@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import InputField from '@/components/forms/inputField'
 import FooterLink from '@/components/forms/FooterLink'
 import { useRouter } from 'next/navigation'
+import { signInWithEmail } from '@/lib/actions/auth.actions'
 
 const SignIn = () => {
   const router = useRouter()
@@ -19,8 +20,8 @@ const SignIn = () => {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-
-      console.log('Sign In data:', data)
+      const result = await signInWithEmail(data)
+      if (result.success) router.push('/');
     } catch (error) {
       console.error(error)
     }
